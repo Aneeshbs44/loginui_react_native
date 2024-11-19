@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Mybutton from '@/components/Mybutton';
 import { useRouter } from 'expo-router';
@@ -10,7 +10,11 @@ const Login = () => {
   const router = useRouter();
 
   const onLogin = () => {
-    router.push('/(tabs)/signup');
+    router.push('/(tabs)/signup'); // Replace 'home' with the correct path for the home screen
+  };
+
+  const onRegister = () => {
+    router.push('/(tabs)/signup'); // Navigate to the signup screen
   };
 
   return (
@@ -37,12 +41,20 @@ const Login = () => {
           style={styles.field1}
           placeholder="Enter your Password"
           placeholderTextColor="#999"
+          secureTextEntry
         />
 
         {/* Button */}
         <View style={styles.buttonContainer}>
           <Mybutton title="Login" onPress={onLogin} />
         </View>
+
+        {/* Register Text */}
+        <TouchableOpacity onPress={onRegister}>
+          <Text style={styles.registerText}>
+            New User? <Text style={styles.registerLink}>Register</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -81,7 +93,7 @@ const styles = StyleSheet.create({
     marginTop: screenHeight / 3000,
     marginBottom: 20,
   },
-  field1:{
+  field1: {
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
@@ -92,6 +104,16 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     marginTop: 60,
+  },
+  registerText: {
+    marginTop: 20,
+    textAlign: 'center',
+    color: '#555',
+    fontSize: 16,
+  },
+  registerLink: {
+    color: '#007BFF',
+    fontWeight: 'bold',
   },
 });
 
